@@ -1,0 +1,79 @@
+Sub Auto()
+	Dim X(3), Y(3)
+	X(1) = 441
+	X(2) = 549
+	X(3) = 649
+	Y(1) = 1095
+	Y(2) = 1040
+	Y(3) = 990
+	
+	Dim INDEX, UPCNT
+	UPCNT = 0
+	While True
+		
+		For INDEX = 1 To 3
+			TracePrint INDEX
+			TouchDown X(INDEX), Y(INDEX)
+			Delay 1000
+			Dim IntX,IntY
+			FindColor 0,0,0,0,"80FFFF|81FFFF|80FF00",0,1.0,intX,intY
+			If intX >-1 then
+    			Traceprint "找到货物"
+    			TouchMove intX + 50, intY
+    			Delay 200
+			Else
+    			Traceprint "没有货物"
+			End If
+			TouchUp
+		Next
+		
+		Delay 1000
+		TouchDown 201, 813
+		TouchMove 545, 640
+		TouchMove 538, 485
+		TouchMove 192, 646
+		TouchMove 198, 473
+		TouchMove 538, 314
+		TouchUp
+	
+		Delay 1000
+		
+		UPCNT = UPCNT + 1
+		If UPCNT >= 10 Then 
+			UPCNT = 0
+			Call Up(204, 805) //升级指定房屋
+			Delay 1000
+		End If
+	Wend
+End Sub
+
+
+Sub Up(X, Y)
+	Tap 643, 764 //进入升级
+	Delay 1000
+	
+	while CmpColor(697, 770, "4DDDFF", 1.0) < 0
+		Traceprint "等待进入升级页面"
+		Delay 500
+	Wend
+	Tap X, Y  //点击建筑
+	Delay 1000
+	
+	Dim intX, intY, res
+	res = FindColor(600,1114, 659, 1132, "FFFFFF", 0, 1.0, intX, intY)
+	//如果没有找到，intX和intY的值都会被置为-1
+	While res > -1
+		Tap 582, 1166
+		Traceprint "升级一次"
+		Delay 500
+		res = FindColor(600,1114, 659, 1132, "FFFFFF", 0, 1.0, intX, intY)
+	Wend
+	
+	Traceprint "金币不足"
+	Tap 639, 763 //退出升级
+	Delay 1000
+End Sub
+
+
+
+Call Auto()
