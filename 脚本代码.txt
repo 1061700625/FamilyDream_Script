@@ -1,6 +1,13 @@
 
 
 Sub Auto()
+	Tap 90, 1820
+	Delay 500
+	
+	Dim HOUSE_X = Array(300,545,800,290,560,800,290,560,780)
+	Dim HOUSE_Y = Array(1200,1080,950,960,820,725,720,580,450)
+	Dim HOUSE_INDEX = 1
+	
 	Dim X(3), Y(3)
 	X(1) = 660
 	X(2) = 825
@@ -14,7 +21,7 @@ Sub Auto()
 	While True
 		
 		For INDEX = 1 To 3
-			TracePrint INDEX
+			//TracePrint INDEX
 			TouchDown X(INDEX), Y(INDEX)
 			Delay 1000
 			Dim IntX,IntY
@@ -43,7 +50,11 @@ Sub Auto()
 		UPCNT = UPCNT + 1
 		If UPCNT >= 10 Then 
 			UPCNT = 0
-			Call Up(300, 1170) //升级指定房屋
+			Call Up(HOUSE_X(HOUSE_INDEX), HOUSE_Y(HOUSE_INDEX)) //升级指定房屋
+			HOUSE_INDEX = HOUSE_INDEX + 1
+			If HOUSE_INDEX > 9 Then 
+				HOUSE_INDEX = 1
+			End If
 			Delay 1000
 		End If
 	Wend
@@ -67,7 +78,7 @@ Sub Up(X, Y)
 	While res > -1
 		Tap 870, 1750
 		Traceprint "升级一次"
-		Delay 500
+		Delay 100
 		res = FindColor(900,1670, 990, 1700, "FFFFFF", 0, 1.0, intX, intY)
 	Wend
 	
@@ -77,7 +88,90 @@ Sub Up(X, Y)
 End Sub
 
 
+Sub HB()
+	Dim intX, intY, res
+	Tap 525, 1810
+	Delay 1000
+	
+	
+	// 相册
+	Tap 100, 1330
+	Delay 500
+	res = FindColor(790, 1070, 910, 1140, "2CD3FF", 0, 1.0, intX, intY)
+	If res > 0 Then 
+		TracePrint "无相册"
+	End If
+	While intX = -1 And intY = -1
+		Tap 100, 1330
+		Delay 500
+		FindColor 790, 1070, 910, 1140, "2CD3FF", 0, 1.0, intX, intY
+	Wend
+	Tap 300, 1120
+	Delay 500
+	
+	// 满福红包
+	res = FindColor(800, 825, 860, 875, "F2CE75", 0, 1.0, intX, intY)
+	If res > -1 Then 
+		TracePrint "无满福红包"
+	End If
+	While res<0
+		TracePrint "满福红包 "
+		Tap 865, 630
+		Delay 1000
+		res = FindColor(695, 1485, 715, 1540, "FFFFFF", 0, 1.0, intX, intY)
+		While res>-1
+			TracePrint "tap "&res
+			Tap 545, 1040
+			Delay 1000
+			res = FindColor(695, 1485, 715, 1540, "FFFFFF", 0, 1.0, intX, intY)
+		Wend
+		res = FindColor(800, 825, 860, 875, "F2D075", 0, 1.0, intX, intY)
+	Wend
+	Delay 100
+	
+	// 多福红包
+	res = FindColor(460, 825, 525, 875, "F2CE75", 0, 1.0, intX, intY)
+	If res > -1 Then 
+		TracePrint "无多福红包"
+	End If
+	While res<0
+		TracePrint "多福红包 "
+		Tap 530, 630
+		Delay 1000
+		res = FindColor(695, 1485, 715, 1540, "FFFFFF", 0, 1.0, intX, intY)
+		While res>-1
+			TracePrint "tap "&res
+			Tap 545, 1040
+			Delay 1000
+			res = FindColor(695, 1485, 715, 1540, "FFFFFF", 0, 1.0, intX, intY)
+		Wend
+		res = FindColor(460, 825, 525, 875, "F2D075", 0, 1.0, intX, intY)
+	Wend
+	Delay 100
+	
+	// 福气红包
+	res = FindColor(140, 825, 200, 875, "F2CE75", 0, 1.0, intX, intY)
+	If res > -1 Then 
+		TracePrint "无福气红包"
+	End If
+	While res<0
+		TracePrint "福气红包 "
+		Tap 200, 630
+		Delay 1000
+		res = FindColor(695, 1485, 715, 1540, "FFFFFF", 0, 1.0, intX, intY)
+		While res>-1
+			TracePrint "tap"
+			Tap 545, 1040
+			Delay 1000
+			res = FindColor(695, 1485, 715, 1540, "FFFFFF", 0, 1.0, intX, intY)
+		Wend
+		res = FindColor(120, 825, 165, 875, "F2D075", 0, 1.0, intX, intY)
+	Wend
+	Delay 100
+	
+End Sub
 
+
+
+Call HB()
 Call Auto()
-
-
