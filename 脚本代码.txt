@@ -95,19 +95,24 @@ Sub HB()
 	
 	
 	// 相册
-	Tap 100, 1330
-	Delay 500
-	res = FindColor(790, 1070, 910, 1140, "2CD3FF", 0, 1.0, intX, intY)
-	If res > 0 Then 
+	res = FindColor(540, 1520, 590, 1555, "3942FA", 0, 1.0, intX, intY)
+	If res > -1 Then 
 		TracePrint "无相册"
-	End If
-	While intX = -1 And intY = -1
+	Else
 		Tap 100, 1330
 		Delay 500
-		FindColor 790, 1070, 910, 1140, "2CD3FF", 0, 1.0, intX, intY
-	Wend
-	Tap 300, 1120
-	Delay 500
+		res = FindColor(790, 1070, 910, 1140, "2CD3FF", 0, 1.0, intX, intY)
+		If res > -1 Then 
+			TracePrint "无相册"
+		End If
+		While intX = -1 And intY = -1
+			Tap 100, 1330
+			Delay 500
+			FindColor 790, 1070, 910, 1140, "2CD3FF", 0, 1.0, intX, intY
+		Wend
+		Tap 300, 1120
+		Delay 500
+	End If
 	
 	// 满福红包
 	res = FindColor(800, 825, 860, 875, "F2D075|F2CE75", 0, 1.0, intX, intY)
