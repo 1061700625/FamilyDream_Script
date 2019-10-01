@@ -110,7 +110,7 @@ Sub HB()
 	Delay 500
 	
 	// 满福红包
-	res = FindColor(800, 825, 860, 875, "F2CE75", 0, 1.0, intX, intY)
+	res = FindColor(800, 825, 860, 875, "F2D075|F2CE75", 0, 1.0, intX, intY)
 	If res > -1 Then 
 		TracePrint "无满福红包"
 	End If
@@ -125,12 +125,12 @@ Sub HB()
 			Delay 1000
 			res = FindColor(695, 1485, 715, 1540, "FFFFFF", 0, 1.0, intX, intY)
 		Wend
-		res = FindColor(800, 825, 860, 875, "F2D075", 0, 1.0, intX, intY)
+		res = FindColor(800, 825, 860, 875, "F2D075|F2CE75", 0, 1.0, intX, intY)
 	Wend
 	Delay 100
 	
 	// 多福红包
-	res = FindColor(460, 825, 525, 875, "F2CE75", 0, 1.0, intX, intY)
+	res = FindColor(460, 825, 525, 875, "F2D075|F2CE75", 0, 1.0, intX, intY)
 	If res > -1 Then 
 		TracePrint "无多福红包"
 	End If
@@ -145,12 +145,12 @@ Sub HB()
 			Delay 1000
 			res = FindColor(695, 1485, 715, 1540, "FFFFFF", 0, 1.0, intX, intY)
 		Wend
-		res = FindColor(460, 825, 525, 875, "F2D075", 0, 1.0, intX, intY)
+		res = FindColor(460, 825, 525, 875, "F2D075|F2CE75", 0, 1.0, intX, intY)
 	Wend
 	Delay 100
 	
 	// 福气红包
-	res = FindColor(140, 825, 200, 875, "F2CE75", 0, 1.0, intX, intY)
+	res = FindColor(140, 825, 200, 875, "F2D075|F2CE75", 0, 1.0, intX, intY)
 	If res > -1 Then 
 		TracePrint "无福气红包"
 	End If
@@ -165,7 +165,7 @@ Sub HB()
 			Delay 1000
 			res = FindColor(695, 1485, 715, 1540, "FFFFFF", 0, 1.0, intX, intY)
 		Wend
-		res = FindColor(120, 825, 165, 875, "F2D075", 0, 1.0, intX, intY)
+		res = FindColor(120, 825, 165, 875, "F2D075|F2CE75", 0, 1.0, intX, intY)
 	Wend
 	Delay 100
 	
